@@ -1,242 +1,746 @@
--- Mensagem de carregamento
-print("Script carregado com sucesso!")
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/main/source.lua'))()
 
--- Criação do ScreenGui
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local TextLabel = Instance.new("TextLabel")
-local FlyButton = Instance.new("TextButton")
-local SpeedButton = Instance.new("TextButton")
-local WallHackButton = Instance.new("TextButton")
-local TeleportButton = Instance.new("TextButton")
-local ESPButton = Instance.new("TextButton")
-local AnnoyButton = Instance.new("TextButton")
-local CreditsButton = Instance.new("TextButton")
-local CloseButton = Instance.new("TextButton")
-local ToggleMenuButton = Instance.new("TextButton")
-local PlayerDropdown = Instance.new("TextButton")
-local SpectateButton = Instance.new("TextButton")
-local VoidButton = Instance.new("TextButton")
-local FreeCameraButton = Instance.new("TextButton")
-local NoClipButton = Instance.new("TextButton")
-local AutoFarmButton = Instance.new("TextButton")
-local AntiBanButton = Instance.new("TextButton")
-local SaveSettingsButton = Instance.new("TextButton")
-local ToggleESPButton = Instance.new("TextButton")
-local ChangeColorButton = Instance.new("TextButton")
-local ShowCoordsButton = Instance.new("TextButton")
-local SpeedMultiplierSlider = Instance.new("TextButton")
+local Window = Rayfield:CreateWindow({
+   Name = "Flee that retarded facility pls",
+   LoadingTitle = "please dont ban me",
+   LoadingSubtitle = "sub to raisincains",
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD.
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Sirius Hub",
+      Subtitle = "Key System",
+      Note = "Join the discord (discord.gg/sirius)",
+      FileName = "SiriusKey",
+      SaveKey = true,
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = "Hello"
+   }
+})
 
--- Função para criar botões
-local function createButton(button, parent, position, text, color, size)
-    button.Parent = parent
-    button.BackgroundColor3 = color
-    button.Position = position
-    button.Size = size or UDim2.new(0.8, 0, 0.1, 0)
-    button.Text = text
-    button.Font = Enum.Font.SourceSansBold
-    button.TextSize = 18
-    button.TextColor3 = Color3.fromRGB(255, 255, 255)
-    button.BorderSizePixel = 2
-    button.BorderColor3 = Color3.fromRGB(255, 0, 0)
+local Home = Window:CreateTab("Home", 13209388803) -- Title, Imagee
+local Esp = Window:CreateTab("Esp", 13209481800) -- Title, Imagee
+local Beast = Window:CreateTab("Beast", 13209523447) -- Title, Imagee
+local NBeast = Window:CreateTab("Non-Beast", 13209387638)
+local Player = Window:CreateTab("Player", 13209386618) -- Title, Imagee
+
+local Section = Esp:CreateSection("ESP")
+local button = Esp:CreateToggle({
+   Name = "Player Esp",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(state)
+if state == true then
+	for i,v in pairs(game.Players:GetChildren()) do
+		if v:IsA("Player") and v.Name ~= game.Players.LocalPlayer.Name then
+			pcall(function()
+				local transparency = 0.5
+				local Folder = Instance.new("Folder",v.Character)
+				Folder.Name = v.Name .. "'s ESP"
+				--Head
+				local Head = Instance.new("BoxHandleAdornment",Folder)
+				Head.AlwaysOnTop = true
+				Head.Adornee = v.Character.Head
+				Head.ZIndex = 1
+				Head.Name = "Head"
+				Head.Transparency = transparency
+				Head.Size = v.Character.Head.Size
+				--Torso
+				local Torso = Instance.new("BoxHandleAdornment",Folder)
+				Torso.AlwaysOnTop = true
+				Torso.Adornee = v.Character.Torso
+				Torso.ZIndex = 1
+				Torso.Name = "Torso"
+				Torso.Transparency = transparency
+				Torso.Size = v.Character.Torso.Size
+				--Left Arm
+				local LeftArm = Instance.new("BoxHandleAdornment",Folder)
+				LeftArm.AlwaysOnTop = true
+				LeftArm.Adornee = v.Character["Left Arm"]
+				LeftArm.ZIndex = 1
+				LeftArm.Name = "LeftArm"
+				LeftArm.Transparency = transparency
+				LeftArm.Size = v.Character["Left Arm"].Size
+				--Right Arm
+				local RightArm = Instance.new("BoxHandleAdornment",Folder)
+				RightArm.AlwaysOnTop = true
+				RightArm.Adornee = v.Character["Right Arm"]
+				RightArm.ZIndex = 1
+				RightArm.Name = "RightArm"
+				RightArm.Transparency = transparency
+				RightArm.Size = v.Character["Right Arm"].Size
+				--Right Leg
+				local RightLeg = Instance.new("BoxHandleAdornment",Folder)
+				RightLeg.AlwaysOnTop = true
+				RightLeg.Adornee = v.Character["Right Leg"]
+				RightLeg.ZIndex = 1
+				RightLeg.Name = "RightLeg"
+				RightLeg.Transparency = transparency
+				RightLeg.Size = v.Character["Right Leg"].Size
+				--Left Leg
+				local LeftLeg = Instance.new("BoxHandleAdornment",Folder)
+				LeftLeg.AlwaysOnTop = true
+				LeftLeg.Name = "LeftLeg"
+				LeftLeg.Adornee = v.Character["Left Leg"]
+				LeftLeg.ZIndex = 1
+				LeftLeg.Transparency = transparency
+				LeftLeg.Size = v.Character["Left Leg"].Size
+				--Colors if beast or not
+				getgenv().LoopBeastColor = game.RunService.Stepped:Connect(function()
+				if v.TempPlayerStatsModule.IsBeast.Value == true then
+					Head.Color3 = Color3.fromRGB(205, 98, 152)
+					Torso.Color3 = Color3.fromRGB(205, 98, 152)
+					LeftArm.Color3 = Color3.fromRGB(205, 98, 152)
+					RightArm.Color3 = Color3.fromRGB(205, 98, 152)
+					RightLeg.Color3 = Color3.fromRGB(205, 98, 152)
+					LeftLeg.Color3 = Color3.fromRGB(205, 98, 152)
+				elseif v.TempPlayerStatsModule.IsBeast.Value == false then
+					Head.Color3 = Color3.new(225,1,1)
+					Torso.Color3 = Color3.new(1,1,1)
+					LeftArm.Color3 = Color3.new(1,1,1)
+					RightArm.Color3 = Color3.new(1,1,1)
+					RightLeg.Color3 = Color3.new(1,1,1)
+					LeftLeg.Color3 = Color3.new(1,1,1)
+				end
+				end)
+        --[[
+        --BillboardGui
+        local BillboardGui = Instance.new("BillboardGui",Folder)
+        BillboardGui.AlwaysOnTop = true
+        BillboardGui.Enabled = true
+        BillboardGui.Adornee = v.Character.Head
+        BillboardGui.Size = UDim2.new(0,100,0,100)
+        --NameTag
+        local NameTag = Instance.new("TextLabel",BillboardGui)
+        NameTag.BackgroundTransparency = 1
+        NameTag.Size = UDim2.new(0,100,0,10)
+        if v.TempPlayerStatsModule.IsBeast.Value == true then
+        NameTag.TextColor3 = Color3.new(1,0,0)
+        elseif v.TempPlayerStatsModule.IsBeast.Value == false then
+        NameTag.TextColor3 = Color3.new(1,1,1)
+        end
+        NameTag.ZIndex = 10
+        NameTag.Visible = true
+        NameTag.TextSize = 20
+        NameTag.Text = "Name: " .. v.Name
+        ]]
+			end)
+		end
+	end
+else
+getgenv().LoopBeastColor:Disconnect()
+for i,v in pairs(game.Players:GetChildren()) do
+    if v:IsA("Player") then
+   for i,e in pairs(v.Character:GetChildren()) do
+   if e:IsA("Folder") then
+       pcall(function()
+       e:Destroy()
+       end)
+end
+end
+end
+end
+end
+   end,
+})
+
+local Toggle = Esp:CreateToggle({
+   Name = "Door Esp",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(state)
+if state == true then
+getgenv().DoorESP = false
+	spawn(function()
+		--single doors
+		for i,v in pairs(workspace:GetDescendants()) do
+			if v.Name == "SingleDoor" then
+				pcall(function()
+					local ESP = Instance.new("Highlight")
+					ESP.Parent = v.Door
+				end)
+
+			end
+		end
+		wait(1)
+
+		for i,v in pairs(workspace:GetDescendants()) do
+			if v.Name == "SingleDoor" then
+				spawn(function()
+					while true do
+						pcall(function()
+							if v.DoorTrigger.ActionSign.Value == 11 then
+								v.Door.Highlight.FillColor = Color3.new(0,1,0)
+							elseif v.DoorTrigger.ActionSign.Value == 10 then
+								v.Door.Highlight.FillColor = Color3.new(1,0,0)
+							end
+						end)
+						if getgenv().DoorESP == true then
+						    break;
+						end
+						wait(0.1)
+					end
+				end)
+				
+				
+			end
+		end
+		
+	end)
+	--double doors
+	spawn(function()
+		for i,v in pairs(workspace:GetDescendants()) do
+			if v.Name == "DoubleDoor" then
+				pcall(function()
+					local ESP = Instance.new("Highlight")
+					ESP.Parent = v
+				end)
+
+			end
+		end
+		wait(1)
+
+		for i,v in pairs(workspace:GetDescendants()) do
+			if v.Name == "DoubleDoor" then
+				spawn(function()
+					while true do
+						pcall(function()
+							if v.DoorTrigger.ActionSign.Value == 11 then
+								v.Highlight.FillColor = Color3.new(0,1,0)
+							elseif v.DoorTrigger.ActionSign.Value == 10 then
+								v.Highlight.FillColor = Color3.new(1,0,0)
+							end
+						end)
+                        if getgenv().DoorESP == true then
+                             print("Stopped itLop!2")
+                             break;
+                        end
+                        wait(0.1)
+					end
+				end)
+			end
+		end
+	end)
+else
+getgenv().DoorESP = true
+	--signle door
+	for i,v in pairs(workspace:GetDescendants()) do
+		if v.Name == "SingleDoor" then
+			pcall(function()
+				v.Door.Highlight:Destroy()
+			end)
+
+		end
+	end
+
+	--double doors
+	for i,v in pairs(workspace:GetDescendants()) do
+		if v.Name == "DoubleDoor" then
+			pcall(function()
+				v.Highlight:Destroy()
+			end)
+
+		end
+	end
+end   end,
+})
+
+local Toggle = Esp:CreateToggle({
+   Name = "Computer Esp",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(state)
+   if state == true then
+getgenv().StopComputerESP = false
+for i,v in pairs(workspace:GetDescendants()) do 
+    if v.Name == "ComputerTable" then
+        pcall(function()
+        local ESP = Instance.new("Highlight",v)
+        end)
+    end
 end
 
--- Criação do ScreenGui
-ScreenGui.Name = "MenuGui"
-ScreenGui.Parent = game.CoreGui
+spawn(function()
+while true do
+for i,v in pairs(workspace:GetDescendants()) do
+    if v.Name == "ComputerTable" then
+        if v.Screen.BrickColor == BrickColor.new("Bright blue") then
+            pcall(function()
+          v.Highlight.FillColor = Color3.new(0,0,1)
+            end)
+        elseif v.Screen.BrickColor == BrickColor.new("Dark green") then
+            pcall(function()
+          v.Highlight.FillColor = Color3.new(0,1,0)
+            end)
+        end
+        if getgenv().StopComputerESP == true then
+          print("Stopped itLop!PC")
+          break;
+        end
+    end
+end
+wait(1)
+end
+end)
+else
+getgenv().StopComputerESP = true
+for i,v in pairs(workspace:GetDescendants()) do 
+    if v.Name == "ComputerTable" then
+        pcall(function()
+        v.Highlight:Destroy()
+        end)
+    end
+end
+end
+   end,
+})
 
--- Propriedades do Frame
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Frame.Position = UDim2.new(0.5, -150, 0.5, -200)
-Frame.Size = UDim2.new(0, 300, 0, 700)
-Frame.BackgroundTransparency = 0.3
-Frame.BorderSizePixel = 2
-Frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
+local Toggle = Esp:CreateToggle({
+   Name = "Freeze Pod Esp",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(state)
+   if state == true then
+for i,v in pairs(workspace:GetDescendants()) do 
+    if v.Name == "FreezePod" then
+        pcall(function()
+        local ESP = Instance.new("Highlight",v)
+        end)
+    end
+end
+else
+for i,v in pairs(workspace:GetDescendants()) do 
+    if v.Name == "FreezePod" then
+        pcall(function()
+        v.Highlight:Destroy()
+        end)
+    end
+end
+end
+   end,
+})
 
--- Propriedades do TextLabel
-TextLabel.Parent = Frame
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-TextLabel.Size = UDim2.new(1, 0, 0.1, 0)
-TextLabel.Text = "Menu Principal"
-TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.Font = Enum.Font.SourceSansBold
-TextLabel.TextSize = 24
+local Section = Beast:CreateSection("Beast")
 
--- Criação dos botões
-createButton(FlyButton, Frame, UDim2.new(0.1, 0, 0.2, 0), "Fly", Color3.fromRGB(255, 0, 0))
-createButton(SpeedButton, Frame, UDim2.new(0.1, 0, 0.3, 0), "Speed", Color3.fromRGB(255, 0, 0))
-createButton(WallHackButton, Frame, UDim2.new(0.1, 0, 0.4, 0), "Atravessar Parede", Color3.fromRGB(255, 0, 0))
-createButton(TeleportButton, Frame, UDim2.new(0.1, 0, 0.5, 0), "Teleportar", Color3.fromRGB(255, 0, 0))
-createButton(ESPButton, Frame, UDim2.new(0.1, 0, 0.6, 0), "ESP", Color3.fromRGB(255, 0, 0))
-createButton(AnnoyButton, Frame, UDim2.new(0.1, 0, 0.7, 0), "Irritar", Color3.fromRGB(255, 0, 0))
-createButton(CreditsButton, Frame, UDim2.new(0.1, 0, 0.8, 0), "Créditos", Color3.fromRGB(255, 0, 0))
-createButton(SpectateButton, Frame, UDim2.new(0.1, 0, 0.9, 0), "Espectar", Color3.fromRGB(255, 0, 0))
-createButton(VoidButton, Frame, UDim2.new(0.1, 0, 1.0, 0), "Void", Color3.fromRGB(255, 0, 0))
-createButton(CloseButton, Frame, UDim2.new(0.9, -20, 0, 10), "X", Color3.fromRGB(255, 0, 0))
-createButton(ToggleMenuButton, ScreenGui, UDim2.new(0, 10, 0, 10), "Menu", Color3.fromRGB(255, 0, 0))
-createButton(ToggleESPButton, Frame, UDim2.new(0.1, 0, 1.1, 0), "Alternar ESP", Color3.fromRGB(0, 255, 0))
-createButton(ChangeColorButton, Frame, UDim2.new(0.1, 0, 1.2, 0), "Mudar Cor", Color3.fromRGB(0, 0, 255))
-createButton(ShowCoordsButton, Frame, UDim2.new(0.1, 0, 1.3, 0), "Mostrar Coordenadas", Color3.fromRGB(255, 255, 0))
-createButton(SpeedMultiplierSlider, Frame, UDim2.new(0.1, 0, 1.4, 0), "Multiplicador de Velocidade", Color3.fromRGB(0, 255, 255))
+local Button = Beast:CreateButton({
+   Name = "Infinite Sprint",
+   Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+game.UserInputService.InputBegan:Connect(function(key)
+if key.KeyCode == Enum.KeyCode.Q then
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 30
+end
+end)
 
--- Variáveis de configuração
-local flyEnabled = false
-local speedEnabled = false
-local wallHackEnabled = false
-local espEnabled = false
-local annoyEnabled = false
-local selectedPlayer = nil
-local espActive = false
-local showCoords = false
-local speedMultiplier = 1
+game.UserInputService.InputEnded:Connect(function(key)
+if key.KeyCode == Enum.KeyCode.Q then
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+end
+end)
 
--- Função para salvar configurações
-local function saveSettings()
-    -- Salvar configurações personalizadas (tamanho, posição, etc.)
-    local settings = {
-        flyEnabled = flyEnabled,
-        speedEnabled = speedEnabled,
-        wallHackEnabled = wallHackEnabled,
-        espEnabled = espEnabled,
-        annoyEnabled = annoyEnabled,
-        selectedPlayer = selectedPlayer,
-        speedMultiplier = speedMultiplier
-    }
-    -- Simulação de salvar dados
-    print("Configurações salvas!")
+pcall(function()
+game.Players.LocalPlayer.Character.PowersLocalScript:Destroy()    
+end)
+end
+end,
+})
+
+local Button = Beast:CreateButton({
+   Name = "No Slow",
+   Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+pcall(function()
+game.Players.LocalPlayer.Character.PowersLocalScript:Destroy()
+end)
+end
+   end,
+})
+
+local Button = Beast:CreateButton({
+   Name = "Enable Crawl",
+   Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+game:GetService("Players").LocalPlayer.TempPlayerStatsModule.DisableCrawl.Value = false
+end
+end
+})
+
+local Button = Beast:CreateButton({
+   Name = "Remove Sound And Glow",
+   Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+for i,v in pairs(game.Players.LocalPlayer.Character.Hammer.Handle:GetChildren()) do
+    if v:IsA("Sound") then
+        pcall(function()
+        v:Destroy()
+        end)
+    end
 end
 
--- Funções de configuração do menu e das funcionalidades
+pcall(function()
+game.Players.LocalPlayer.Character.Gemstone.Handle.PointLight:Destroy()
+end)
+end
+end
+})
 
--- Função para alternar visibilidade do menu
-ToggleMenuButton.MouseButton1Click:Connect(function()
-    Frame.Visible = not Frame.Visible
+local Button = Beast:CreateButton({
+   Name = "Fix Camera",
+   Callback = function()
+local player = game.Players.LocalPlayer
+
+	workspace.CurrentCamera.CameraSubject = player.Character:FindFirstChildWhichIsA('Humanoid')
+	workspace.CurrentCamera.CameraType = "Custom"
+	player.CameraMinZoomDistance = 0.5
+	player.CameraMaxZoomDistance = math.huge
+	player.CameraMode = "Classic"
+	player.Character.Head.Anchored = false
+   end,
+})
+
+local Section = NBeast:CreateSection("Non-Beast",true)
+
+local Button = NBeast:CreateButton({
+   Name = "Q to Sprint",
+   Callback = function()
+game.UserInputService.InputBegan:Connect(function(key)
+if key.KeyCode == Enum.KeyCode.Q then
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 30
+end
 end)
 
--- Função para fechar o menu
-CloseButton.MouseButton1Click:Connect(function()
-    Frame.Visible = false
+game.UserInputService.InputEnded:Connect(function(key)
+if key.KeyCode == Enum.KeyCode.Q then
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+end
 end)
 
--- Funções de Fly
-FlyButton.MouseButton1Click:Connect(function()
-    flyEnabled = not flyEnabled
-    local player = game.Players.LocalPlayer
-    local character = player.Character
-    if character then
-        if flyEnabled then
-            character.Humanoid:ChangeState(Enum.HumanoidStateType.Physics)
-            character.HumanoidRootPart.Velocity = Vector3.new(0, 50, 0)
-        else
-            character.Humanoid:ChangeState(Enum.HumanoidStateType.Running)
-            character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
-        end
+pcall(function()
+game.Players.LocalPlayer.Character.PowersLocalScript:Destroy()    
+end)
+end,
+})
+
+local Button = NBeast:CreateButton({
+   Name = "No fail on hack",
+   Callback = function()
+spawn(function()
+while wait() do
+game.ReplicatedStorage.RemoteEvent:FireServer("SetPlayerMinigameResult",true)
+end
+end)
+end,
+})
+
+local Section = Player:CreateSection("Player")
+
+local Button = Player:CreateButton({
+   Name = "Respawn",
+   Callback = function()
+local plr = game.Players.LocalPlayer
+plr.Character:Destroy()
+end,
+})
+
+local Button = Player:CreateButton({
+   Name = "Invisible (F) must disable anticheat",
+   Callback = function()
+local Global = getgenv and getgenv()
+local First = true
+local Restart = true
+local SoundService = game:GetService("SoundService")
+local StoredCF
+local SafeZone
+if Global.SafeZone ~= nil then
+	if type(Global.SafeZone) ~= "userdata" then return error("CFrame must be a userdata (CFrame.new(X, X, X)") end
+	SafeZone = Global.SafeZone
+else
+	SafeZone = CFrame.new(0,-300,0)       
+end
+
+local ScriptStart = true
+local Reset = false
+local DeleteOnDeath = {}
+local Activate
+local Noclip
+if Global.Key == nil then
+	Activate = "F"
+else
+	Activate = tostring(Global.Key)     
+end
+
+if Global.Noclip == nil then
+	Noclip = false
+else
+	Noclip = Global.Noclip        
+end
+
+if type(Noclip) ~= "boolean" then return error("Noclip value isn't a boolean") end
+
+function notify(Message)
+	game:GetService("StarterGui"):SetCore("SendNotification", { 
+		Title = "FE Invisible";
+		Text = Message;
+		Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://7046168694"
+	SoundService:PlayLocalSound(sound)
+end
+
+if Global.Running then
+	return notify("Script is already running")
+else
+	Global.Running = true
+end
+
+local IsInvisible = false
+local WasInvisible = false
+local Died = false
+local LP = game:GetService("Players").LocalPlayer
+local UserInputService = game:GetService("UserInputService")
+repeat wait() until LP.Character
+repeat wait() until LP.Character:FindFirstChild("Humanoid")
+local RealChar = LP.Character or LP.CharacterAdded:Wait()
+RealChar.Archivable = true
+local FakeChar = RealChar:Clone()
+FakeChar:WaitForChild("Humanoid").DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+FakeChar.Parent = game:GetService("Workspace")
+
+for _, child in pairs(FakeChar:GetDescendants()) do
+	if child:IsA("BasePart") and child.CanCollide == true then
+		child.CanCollide = false
+	end
+end
+
+FakeChar:SetPrimaryPartCFrame(SafeZone * CFrame.new(0, 5, 0))
+
+local Part
+Part = Instance.new("Part", workspace)
+Part.Anchored = true
+Part.Size = Vector3.new(200, 1, 200)
+Part.CFrame = SafeZone
+Part.CanCollide = true
+
+
+for i, v in pairs(FakeChar:GetDescendants()) do
+	if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+		v.Transparency = 0.7
+	end
+end
+
+for i, v in pairs(RealChar:GetChildren()) do
+	if v:IsA("LocalScript") then
+		local clone = v:Clone()
+		clone.Disabled = true
+		clone.Parent = FakeChar
+	end
+end
+
+function StopScript()
+	if ScriptStart == false then return end
+	if Died == false then
+		if Restart == true then
+			notify("The character used died!\nStopping...")
+		else
+			notify("Script successfuly ended !")
+		end
+		Part:Destroy()
+		if IsInvisible and RealChar:FindFirstChild("HumanoidRootPart") then
+			Visible() 
+			WasInvisible = true
+		end
+		
+		if IsInvisible == false and LP.Character:WaitForChild("Humanoid").Health == 0 then
+			WasInvisible = true
+		end
+		if not RealChar:FindFirstChild("Humanoid") then
+			Reset = true
+			print("a")
+		end
+		
+		game:GetService("Workspace").CurrentCamera.CameraSubject = RealChar:WaitForChild("Humanoid")
+
+		if FakeChar then
+			FakeChar:Destroy()
+		end
+
+		if WasInvisible then
+			local char = LP.Character
+			if char:FindFirstChildOfClass("Humanoid") then char:FindFirstChildOfClass("Humanoid"):ChangeState(15) end
+			char:ClearAllChildren()
+			local newChar = Instance.new("Model")
+			newChar.Parent = workspace
+			LP.Character = newChar
+			wait()
+			LP.Character = char
+			newChar:Destroy()
+			for _,v in pairs(DeleteOnDeath) do
+				v:Destroy()
+			end
+			
+		else
+			for _,v in pairs(DeleteOnDeath) do
+				v.ResetOnSpawn = true
+			end
+		end
+		Global.Running = false
+		ScriptStart = false
+		if Restart == true then
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FE-Invisible.lua'))()
+		end
+		
+			LP.CharacterAdded:Connect(function()
+				if Reset == false then return end
+			loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FE-Invisible.lua'))()
+		end)
+		
+	end
+end
+
+RealChar:WaitForChild("Humanoid").Died:Connect(function()
+	StopScript()
+end)
+
+
+FakeChar:WaitForChild("Humanoid").Died:Connect(function()
+	StopScript()
+end)
+
+function Invisible()
+	StoredCF = RealChar:GetPrimaryPartCFrame()
+	
+if First == true then
+		First = false
+		for _,v in pairs(LP:WaitForChild("PlayerGui"):GetChildren()) do 
+		if v:IsA("ScreenGui") then
+			if v.ResetOnSpawn == true then
+				v.ResetOnSpawn = false
+				table.insert(DeleteOnDeath, v)
+			end
+		end
+	end
+	end
+	
+	if Noclip == true then
+	for _, child in pairs(FakeChar:GetDescendants()) do
+		if child:IsA("BasePart") and child.CanCollide == true then
+			child.CanCollide = false
+		end
+		end
+	end
+	FakeChar:SetPrimaryPartCFrame(StoredCF)
+	FakeChar:WaitForChild("HumanoidRootPart").Anchored = false
+	LP.Character = FakeChar
+	game:GetService("Workspace").CurrentCamera.CameraSubject = FakeChar:WaitForChild("Humanoid")
+		for _, child in pairs(RealChar:GetDescendants()) do
+			if child:IsA("BasePart") and child.CanCollide == true then
+				child.CanCollide = false
+			end
+		end
+
+	RealChar:SetPrimaryPartCFrame(SafeZone * CFrame.new(0, 5, 0))
+	--	RealChar:WaitForChild("HumanoidRootPart").Anchored = true
+	RealChar:WaitForChild("Humanoid"):UnequipTools()
+
+	for i, v in pairs(FakeChar:GetChildren()) do
+		if v:IsA("LocalScript") then
+			v.Disabled = false
+		end
+	end
+end
+
+function Visible()
+	StoredCF = FakeChar:GetPrimaryPartCFrame()
+	for _, child in pairs(RealChar:GetDescendants()) do
+		if child:IsA("BasePart") and child.CanCollide == true then
+			child.CanCollide = true
+		end
+	end
+	RealChar:WaitForChild("HumanoidRootPart").Anchored = false
+	RealChar:SetPrimaryPartCFrame(StoredCF)
+	LP.Character = RealChar
+	FakeChar:WaitForChild("Humanoid"):UnequipTools()
+	game:GetService("Workspace").CurrentCamera.CameraSubject = RealChar:WaitForChild("Humanoid")
+	for _, child in pairs(FakeChar:GetDescendants()) do
+		if child:IsA("BasePart") and child.CanCollide == true then
+			child.CanCollide = false
+		end
+	end
+	FakeChar:SetPrimaryPartCFrame(SafeZone * CFrame.new(0, 5, 0))
+		FakeChar:WaitForChild("HumanoidRootPart").Anchored = true
+	for i, v in pairs(FakeChar:GetChildren()) do
+		if v:IsA("LocalScript") then
+			v.Disabled = true
+		end
+	end
+end
+
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+	if ScriptStart == false then return end
+	if gameProcessed then return end
+	if input.KeyCode.Name:lower() ~= Activate:lower() then return end
+	if IsInvisible == false then
+		Invisible()
+		IsInvisible = true
+	else
+		Visible()
+		IsInvisible = false
+	end
+end)
+end,
+})
+
+local Button = Player:CreateButton({
+   Name = "Rejoin",
+   Callback = function()
+  -- rejoin		
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+ 
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+ 
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
     end
 end)
+ 
+coroutine.resume(Rejoin)
+   end,
+})
 
--- Função para Speed
-SpeedButton.MouseButton1Click:Connect(function()
-    speedEnabled = not speedEnabled
-    local player = game.Players.LocalPlayer
-    local character = player.Character
-    if character then
-        character.Humanoid.WalkSpeed = speedEnabled and 100 * speedMultiplier or 16
-    end
-end)
+local button = Player:CreateButton({
+   Name = "Bypass Anticheat (dont if beast)",
+   Callback = function()
+local character = game.Players.LocalPlayer.Character
+    local torso = character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
+    local root = character:FindFirstChild("HumanoidRootPart")
+    local head = character:FindFirstChild("Head")
+    character.Parent = nil
+    root.Parent = nil 
+    wait(0.5)
+    local fake = torso:Clone()
+    fake.Parent = character
+    torso.Name = "HumanoidRootPart"
+    torso.Transparency = 1
+    getgenv().Torsoo = torso
+    character.Parent = workspace
+end,
+})
 
--- Função para WallHack
-WallHackButton.MouseButton1Click:Connect(function()
-    wallHackEnabled = not wallHackEnabled
-    local player = game.Players.LocalPlayer
-    local character = player.Character
-    if character then
-        for _, part in pairs(character:GetChildren()) do
-            if part:IsA("BasePart") then
-                part.CanCollide = not wallHackEnabled
-            end
-        end
-    end
-end)
-
--- Função para Teleporte
-TeleportButton.MouseButton1Click:Connect(function()
-    local player = game.Players.LocalPlayer
-    if selectedPlayer and selectedPlayer.Character then
-        player.Character:SetPrimaryPartCFrame(selectedPlayer.Character.PrimaryPart.CFrame)
-    end
-end)
-
--- Função para ESP
-ESPButton.MouseButton1Click:Connect(function()
-    espEnabled = not espEnabled
-    for _, player in pairs(game.Players:GetPlayers()) do
-        if player ~= game.Players.LocalPlayer then
-            if espEnabled then
-                local highlight = Instance.new("Highlight")
-                highlight.Parent = player.Character
-                highlight.FillColor = Color3.fromRGB(255, 0, 0)
-                highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
-            else
-                for _, highlight in pairs(player.Character:GetChildren()) do
-                    if highlight:IsA("Highlight") then
-                        highlight:Destroy()
-                    end
-                end
-            end
-        end
-    end
-end)
-
--- Função para alternar ESP
-ToggleESPButton.MouseButton1Click:Connect(function()
-    espActive = not espActive
-    for _, player in pairs(game.Players:GetPlayers()) do
-        if player ~= game.Players.LocalPlayer then
-            if espActive then
-                local highlight = Instance.new("Highlight")
-                highlight.Parent = player.Character
-                highlight.FillColor = Color3.fromRGB(255, 0, 0)
-                highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
-            else
-                for _, highlight in pairs(player.Character:GetChildren()) do
-                    if highlight:IsA("Highlight") then
-                        highlight:Destroy()
-                    end
-                end
-            end
-        end
-    end
-end)
-
--- Função para mudar a cor de fundo
-ChangeColorButton.MouseButton1Click:Connect(function()
-    Frame.BackgroundColor3 = Color3.fromRGB(math.random(255), math.random(255), math.random(255))
-end)
-
--- Função para mostrar as coordenadas
-ShowCoordsButton.MouseButton1Click:Connect(function()
-    showCoords = not showCoords
-    local player = game.Players.LocalPlayer
-    if showCoords then
-        local positionLabel = Instance.new("TextLabel")
-        positionLabel.Parent = ScreenGui
-        positionLabel.Position = UDim2.new(0, 10, 0, 40)
-        positionLabel.Size = UDim2.new(0, 200, 0, 50)
-        positionLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-        positionLabel.TextSize = 18
-        positionLabel.Text = "Coordenadas: " .. tostring(player.Character.HumanoidRootPart.Position)
-    end
-end)
-
--- Função para configurar o multiplicador de velocidade
-SpeedMultiplierSlider.MouseButton1Click:Connect(function()
-    speedMultiplier = speedMultiplier + 0.5
-    print("Novo multiplicador de velocidade: " .. speedMultiplier)
-end)
-
--- Salvar configurações
-SaveSettingsButton.MouseButton1Click:Connect(saveSettings)
-
--- Fim do código
-print("Script carregado e pronto para uso.")
+local Label = Home:CreateLabel("This was made by raisincains")
+local Label = Home:CreateLabel("Github.com/raisincains/scripts")
+local Label = Home:CreateLabel("https://www.youtube.com/@raisincains337")
+local Label = Home:CreateLabel("notraisincains#5706")
