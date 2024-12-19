@@ -1,8 +1,8 @@
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/main/source.lua'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "Flee that retarded facility pls",
-   LoadingTitle = "please dont ban me",
+   Name = "Octam Hub",
+   LoadingTitle = "Por favor, não me bane",
    LoadingSubtitle = "sub to raisincains",
    ConfigurationSaving = {
       Enabled = false,
