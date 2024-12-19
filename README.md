@@ -16,9 +16,9 @@ local Window = Rayfield:CreateWindow({
    },
    KeySystem = false, -- Set this to true to use our key system
    KeySettings = {
-      Title = "Sirius Hub",
+      Title = "Octam Hub",
       Subtitle = "Key System",
-      Note = "Join the discord (discord.gg/sirius)",
+      Note = "Script para Flee The Facility",
       FileName = "SiriusKey",
       SaveKey = true,
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
@@ -26,9 +26,9 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
-local Home = Window:CreateTab("Home", 13209388803) -- Title, Imagee
+local Home = Window:CreateTab("Início", 13209388803) -- Title, Imagee
 local Esp = Window:CreateTab("Esp", 13209481800) -- Title, Imagee
-local Beast = Window:CreateTab("Beast", 13209523447) -- Title, Imagee
+local Beast = Window:CreateTab("Fera", 13209523447) -- Title, Imagee
 local NBeast = Window:CreateTab("Non-Beast", 13209387638)
 local Player = Window:CreateTab("Player", 13209386618) -- Title, Imagee
 
